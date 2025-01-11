@@ -20,7 +20,7 @@ dag = DAG(
     default_args = default_args,
     schedule_interval = '@daily',
     catchup = False,
-    tags = ['reddit', 'etl']
+    tags = ['reddit', 'etl', 'pipeline']
     )
 
 
@@ -29,9 +29,9 @@ extract = PythonOperator(
     python_callable = reddit_pipeline,
     op_kwargs = {
         'file_name' : f'reddit_{file_postfix}',
-        'subreddit' : 'etl',
+        'subreddit' : 'dataengineering',
         'time_filter': 'day',
-        'limit':100
+        'limit':1000
     },
     dag =dag
 )
